@@ -2,11 +2,13 @@ import interface
 import tkinter as tk
 from tkinter import messagebox
 
+# criar a janela principal
 root = tk.Tk()
 root.title("Login")
 root.geometry("400x400")
 root.configure(bg="lightblue")
 
+# criação dos widgets
 def login():
     username = username_entry.get()
     password = password_entry.get()
@@ -29,6 +31,7 @@ password_label.pack()
 password_entry = tk.Entry(root, show="*", font=("Arial", 12))
 password_entry.pack()
 
+# criar botão de login
 login_button = tk.Button(root, text="Login", font=("Arial", 12), command=login)
 login_button.pack()
 

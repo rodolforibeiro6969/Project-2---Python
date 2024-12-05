@@ -1,22 +1,22 @@
+# importar bibliotecas
 import tkinter as tk
 import quiz
 
-# Create the main window
+# criar a janela principal
 root = tk.Tk()
-root.title("Quiz App")
+root.title("App de Quiz")
 root.geometry("400x400")
 
-# Create a label to display the question
+# criar label para exibir a pergunta
 question_label = tk.Label(root, text="", font=("Arial", 16))
 question_label.pack()
 
-# Create a label to display the options
+# criar label para exibir as opçoes
 options_label = tk.Label(root, text="", font=("Arial", 12))
 options_label.pack()
 
-# Create a label to display the score
+# criar label para exibir a pontuação
 score_label = tk.Label(root, text="", font=("Arial", 12))
 score_label.pack()
-
 
 root.mainloop()

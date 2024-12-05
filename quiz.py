@@ -2,15 +2,15 @@ import pandas as pd
 import sqlite3
 
 
-# Load csv file into pandas dataframe
+# Carregar arquivo csv em um dataframe pandas
 df = pd.read_csv('quiz-questions.csv')
 
-# Connect to database
+# Ligação à base de dados
 conn = sqlite3.connect('quiz.db')
 c = conn.cursor()
 
-#question,option1,option2,option3,option4,correct
-# Create table
+
+# Criação da tabela na base de dados
 c.execute('''
     CREATE TABLE IF NOT EXISTS quiz (
         question TEXT,
@@ -22,7 +22,7 @@ c.execute('''
     )
 ''')
 
-# Insert data into table
+# Insert dos dados na tabela
 for index, row in df.iterrows():
     c.execute('INSERT INTO quiz (question, option1, option2, option3, option4, correct) VALUES (?, ?, ?, ?, ?, ?)', (row['question'], row['option1'], row['option2'], row['option3'], row['option4'], row['correct']))
 
@@ -31,7 +31,7 @@ df.to_sql('quiz', conn, if_exists='replace', index = False)
 pd.read_sql('SELECT * FROM quiz', conn)
 
 
-
+# Criação das tabelas registo e resultados na base de dados
 c.execute('''
     CREATE TABLE registo (
         id INTEGER PRIMARY KEY,
@@ -49,6 +49,6 @@ c.execute('''
     )
 ''')
 
-# Commit changes and close connection
+# Commit das alterações e fecha a conexão
 conn.commit()
 conn.close()
