@@ -30,6 +30,25 @@ df.to_sql('quiz', conn, if_exists='replace', index = False)
 
 pd.read_sql('SELECT * FROM quiz', conn)
 
+
+
+c.execute('''
+    CREATE TABLE registo (
+        id INTEGER PRIMARY KEY,
+        nome TEXT NOT NULL,
+        password TEXT NOT NULL
+    )
+''')
+
+c.execute('''
+    CREATE TABLE resultados (
+        id INTEGER PRIMARY KEY,
+        user_id INTEGER NOT NULL,
+        score INTEGER NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES registo(id)
+    )
+''')
+
 # Commit changes and close connection
 conn.commit()
 conn.close()
