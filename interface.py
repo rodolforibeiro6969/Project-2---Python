@@ -20,7 +20,7 @@ def carregar_perguntas():
     conn.close()
     return perguntas
 
-# Função para verificar a resposta do usuário
+# Função para verificar a resposta do utilizador
 def verificar_resposta(selected, pergunta_atual, restantes):
     global score
 
@@ -49,7 +49,7 @@ def mostrar_pergunta(pergunta_atual, restantes):
 def finalizar_quiz():
     global user, score
 
-    # Salvar o resultado no banco de dados
+    # Guarda o resultado na bd
     conn = sqlite3.connect("quiz.db")
     cursor = conn.cursor()
     cursor.execute("INSERT INTO results (user_id, score) VALUES ((SELECT id FROM users WHERE username = ?), ?)", (user, score))

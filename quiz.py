@@ -2,11 +2,10 @@ import sqlite3
 import pandas as pd
 
 # def criar_tabelas():
-#     # Conecta ao banco de dados ou cria-o se não existir
 #     conn = sqlite3.connect("quiz.db")
 #     cursor = conn.cursor()
 #
-#     # Criação da tabela de usuários
+#     # Criação da tabela de utilizadores
 #     cursor.execute('''
 #     CREATE TABLE IF NOT EXISTS users (
 #         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,11 +60,11 @@ import pandas as pd
 #             print("Erro: O arquivo CSV não contém todas as colunas necessárias!")
 #             return
 #
-#         # Conectar ao banco de dados
+#         # Conectar à bd
 #         conn = sqlite3.connect("quiz.db")
 #         cursor = conn.cursor()
 #
-#         # Inserir perguntas no banco de dados
+#         # Inserir perguntas na bd
 #         for _, linha in perguntas_df.iterrows():
 #             cursor.execute('''
 #                 INSERT INTO questions (question, option1, option2, option3, option4, correct)
@@ -84,9 +83,9 @@ import pandas as pd
 
 
 def corrigir_respostas():
-    # Conectar ao banco de dados
+    # Conectar à bd
     conn = sqlite3.connect("quiz.db")
-    cursor = conn.cursor()
+    conn.cursor()
 
     # Dicionário com perguntas e os índices corretos (substitua os valores pelos corretos)
     data = [
@@ -197,19 +196,17 @@ def corrigir_respostas():
         ["Qual é a montanha mais alta da Europa?", "Monte Elbrus", "Monte Branco", "Monte Rosa", "Matterhorn", 1],
         ["Em que ano foi fundada a primeira universidade portuguesa?", "1290", "1288", "1292", "1294", 1],
         ["Qual é o maior aquífero do mundo?", "Sistema Aquífero Guarani", "Grande Bacia Artesiana", "Aquífero Núbio", "Aquífero High Plains", 1],
-
-
     ]
 
     # Atualizar a tabela com os índices corretos
     columns = ["Question", "Option1", "Option2", "Option3", "Option4", "Correct"]
     df = pd.DataFrame(data, columns=columns)
 
-    # Salvar o arquivo corrigido
+    # Guardar o ficheiro corrigido
     output_file = "quiz-questions-corrected.xlsx"
     df.to_excel(output_file, index=False)
 
-    print(f"As perguntas corrigidas foram salvas em: {"quiz-questions.csv"}")
+    print(f"As perguntas corrigidas foram guardadas em: {"quiz-questions.csv"}")
 
 # Chamar a função para corrigir
 corrigir_respostas()

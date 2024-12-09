@@ -79,7 +79,7 @@ def finalizar_quiz():
     # Interrompe o temporizador
     stop_timer()
 
-    # Salvar pontuação no banco de dados
+    # Guardar pontuação na bd
     conn = sqlite3.connect("quiz.db")
     cursor = conn.cursor()
     cursor.execute("INSERT INTO results (user_id, score) VALUES ((SELECT id FROM users WHERE username = ?), ?)", (user, score))
@@ -105,7 +105,7 @@ def iniciar_quiz():
     quiz_window = Tk()  # A nova janela principal
     quiz_window.title("Quiz Interativo")
     quiz_window.geometry("600x400")
-    quiz_window.configure(bg="#ADD8E6")  # Azul claro
+    quiz_window.configure(bg="#ADD8E6")
 
     # Label do temporizador
     timer_label = Label(quiz_window, text="", font=("Arial", 14), bg="#ADD8E6")
@@ -146,7 +146,7 @@ def countdown(count, on_timeout):
 
 # Função para reiniciar o temporizador
 def reset_timer(count, on_timeout):
-    stop_timer()  # Garante que o temporizador atual seja interrompido
+    stop_timer()
     countdown(count, on_timeout)
 
 # Função para interromper o temporizador
@@ -157,8 +157,8 @@ def stop_timer():
         quiz_window.after_cancel(timer_id)
         timer_id = None
 
-# Função para login
-def login_usuario():
+# Função de login
+def login_utilizador():
     global user
 
     username = username_entry.get()
@@ -181,10 +181,10 @@ def login_usuario():
         messagebox.showinfo("Sucesso", f"Bem-vindo, {username}!")
         iniciar_quiz()
     else:
-        messagebox.showerror("Erro", "Usuário ou senha inválidos!")
+        messagebox.showerror("Erro", "Utilizador ou palavra-passe inválidas!")
 
-# Função para registrar usuário
-def registrar_usuario():
+# Função para registar um utilizador
+def registar_utilizador():
     username = username_entry.get()
     password = password_entry.get()
 
@@ -198,25 +198,25 @@ def registrar_usuario():
         cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
         conn.commit()
         conn.close()
-        messagebox.showinfo("Sucesso", "Registro concluído! Agora faça login.")
+        messagebox.showinfo("Sucesso", "Registo concluído! Agora faça login.")
     except sqlite3.IntegrityError:
-        messagebox.showerror("Erro", "Nome de usuário já existe!")
+        messagebox.showerror("Erro", "Utilizador já existe!")
 
-# Interface de login/registro
+# Interface de login/registo
 login_window = Tk()
-login_window.title("Login/Registro")
+login_window.title("Login/Registo")
 login_window.geometry("400x300")
-login_window.configure(bg="#001F54")  # Azul escuro
+login_window.configure(bg="#001F54")
 
-Label(login_window, text="Nome de Usuário:", font=("Arial", 12), bg="#001F54", fg="white").pack(pady=10)
+Label(login_window, text="Nome de utilizador:", font=("Arial", 12), bg="#001F54", fg="white").pack(pady=10)
 username_entry = Entry(login_window, font=("Arial", 12))
 username_entry.pack()
 
-Label(login_window, text="Senha:", font=("Arial", 12), bg="#001F54", fg="white").pack(pady=10)
+Label(login_window, text="Palavra-Passe:", font=("Arial", 12), bg="#001F54", fg="white").pack(pady=10)
 password_entry = Entry(login_window, show="*", font=("Arial", 12))
 password_entry.pack()
 
-Button(login_window, text="Login", font=("Arial", 12), command=login_usuario, bg="#D9A96A").pack(pady=10)
-Button(login_window, text="Registrar", font=("Arial", 12), command=registrar_usuario, bg="#D9A96A").pack()
+Button(login_window, text="Login", font=("Arial", 12), command=login_utilizador, bg="#D9A96A").pack(pady=10)
+Button(login_window, text="Registar", font=("Arial", 12), command=registar_utilizador, bg="#D9A96A").pack()
 
 login_window.mainloop()
